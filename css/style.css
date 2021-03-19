@@ -1,0 +1,53 @@
+/******************************************
+/* CSS
+/*******************************************/
+
+/* Box Model Hack */
+*{
+  box-sizing: border-box;
+
+}
+
+/******************************************
+/* NAVBAR
+/*******************************************/
+
+nav { 
+  width: 20%; 
+}
+
+ul {
+  padding-left: 10px;
+  list-style: none; 
+}
+
+/******************************************
+/* LAYOUT
+/*******************************************/
+
+
+.main-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.movie-box {
+  position: relative;
+  width: 250px;
+  margin: 1rem;
+  background: black;
+  /* temp until images get loaded in   */
+  height: 400px;
+}
+
+.movie-info {
+  color: white;
+}
+
+
+
+
+/******************************************
+/* ADDITIONAL STYLES
+/*******************************************/
