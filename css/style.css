@@ -5,7 +5,7 @@
 /* Box Model Hack */
 *{
   box-sizing: border-box;
-
+  outline: 1px solid black;
 }
 
 /******************************************
@@ -27,22 +27,25 @@ ul {
 
 
 .main-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+
 }
 
 .movie-box {
+
   position: relative;
   width: 250px;
   margin: 1rem;
-  background: black;
-  /* temp until images get loaded in   */
   height: 400px;
 }
 
 .movie-info {
-  color: white;
+
+  color: black;
+}
+
+.movie-pic {
+  height: 100%; 
+  width: auto;
 }
 
 

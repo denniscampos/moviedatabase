@@ -8,26 +8,27 @@ async function getMovies() {
 
   console.log(data);
   // Movie Information
-
   // grabs the class .movie box from the html file.
-  const myDiv = document.querySelector(".movie-box");
+  const myDiv = document.createElement("div");
+  myDiv.className = "movie-box"
   for (let i = 0; i < data.results.length; i++) {
     const movieTitle = data.results[i].original_title;
     const movieVotes = data.results[i].vote_average;
-    myDiv.innerHTML += `<img class="movie-pic" src="" alt="movie of picture">
+    const imgData = data.results[i].poster_path;
+    myDiv.innerHTML += `<img class="movie-pic" src="${
+      IMG + imgData
+    }" alt="movie of picture">
                     <div class="movie-info">
                         <h3 class="movie-title">${movieTitle}</h3>
                         <span class="movie-rating">${movieVotes}</span>
                         </div>`;
-
     console.log(myDiv);
-  }
-  try {
-  } catch (error) {
-    console.error(error);
+
+    try {
+      await fetch(apiURL);
+    } catch (err) {
+      alert(err);
+    }
   }
 }
-
 getMovies();
-
-//next task figure out image.
