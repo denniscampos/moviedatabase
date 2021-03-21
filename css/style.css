@@ -5,19 +5,51 @@
 /* Box Model Hack */
 *{
   box-sizing: border-box;
+  font-family: 'Fira Sans', sans-serif;
+}
+
+body {
+  background: #484848;
+  color: white;
 }
 
 /******************************************
 /* NAVBAR
 /*******************************************/
+h1 {
+  padding: 20px;
+  font-size: 3rem;
+  text-align: center;
+  border-bottom: 2px solid rgb(55, 54, 54);
+}
 
 nav { 
-  width: 20%; 
+  display: flex;
+  justify-content: center;
+  align-content: center;
 }
 
 ul {
+  display: flex;
+  flex-wrap: wrap;
   padding-left: 10px;
   list-style: none; 
+}
+
+li {
+  margin: 10px;
+  padding: 10px;
+  border: 2px solid rgb(55, 54, 54);
+  border-radius: 5px;
+}
+
+a {
+  text-decoration: none;
+  font-size: 1.3rem;
+}
+
+a:visited {
+  color: white; 
 }
 
 /******************************************
@@ -35,8 +67,10 @@ ul {
   flex-direction: column;
   height: 450px;
   width: 250px; 
-  margin: 0 30px;
-  padding: 40px 10px;
+  margin: 0 30px 20px;
+  padding: 10px 10px 75px;
+  background: rgba(126, 124, 124, 0.557);
+  border-radius: 5px;
 }
 
 .movie-info {
@@ -53,6 +87,7 @@ ul {
 
 .movie-title {
   margin: 0;
+  padding: 5px 0; 
 }
 
 
