@@ -25,22 +25,21 @@ ul {
 /* LAYOUT
 /*******************************************/
 
-
 .main-container {
-
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 .movie-box {
-
-  position: relative;
-  width: 250px;
-  margin: 1rem;
   height: 400px;
+  width: 300px; 
+  margin: 20px;
 }
 
 .movie-info {
-
-  color: black;
+  height: 200px;
+  width: 400px;
 }
 
 .movie-pic {

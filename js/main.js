@@ -9,21 +9,26 @@ async function getMovies() {
   console.log(data);
   // Movie Information
   // grabs the class .movie box from the html file.
-  const myDiv = document.createElement("div");
-  myDiv.className = "movie-box"
+  const mainDiv = document.createElement("div");
+  mainDiv.className = "main-container"
   for (let i = 0; i < data.results.length; i++) {
+    // if this out the loop it will not loop with the other items
+    // const myDiv = document.createElement("div"); 
+    // myDiv.className = "movie-box"
     const movieTitle = data.results[i].original_title;
     const movieVotes = data.results[i].vote_average;
     const imgData = data.results[i].poster_path;
-    myDiv.innerHTML += `<img class="movie-pic" src="${
+    // myDiv.querySelectorAll('movie-box')
+    mainDiv.innerHTML += `<div class="movie-box"><img class="movie-pic" src="${
       IMG + imgData
     }" alt="movie of picture">
                     <div class="movie-info">
                         <h3 class="movie-title">${movieTitle}</h3>
                         <span class="movie-rating">${movieVotes}</span>
-                        </div>`;
-    console.log(myDiv);
-
+                        </div></div>`;
+    console.log();
+    document.body.appendChild(mainDiv) // prints to the DOM
+    
     try {
       await fetch(apiURL);
     } catch (err) {
@@ -31,4 +36,4 @@ async function getMovies() {
     }
   }
 }
-getMovies();
+getMovies()
