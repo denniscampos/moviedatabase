@@ -6,34 +6,53 @@ async function getMovies() {
   const res = await fetch(apiURL);
   const data = await res.json();
 
-  console.log(data);
+  showMovies(data.results);
+
+  try {
+    await fetch(apiURL);
+  } catch (err) {
+    alert(err);
+  }
+}
+
+function showMovies(movies) {
   // Movie Information
   // grabs the class .movie box from the html file.
   const mainDiv = document.createElement("div");
   mainDiv.className = "main-container";
-  for (let i = 0; i < data.results.length; i++) {
-    // if this out the loop it will not loop with the other items
-    // const myDiv = document.createElement("div");
-    // myDiv.className = "movie-box"
-    const movieTitle = data.results[i].original_title;
-    const movieVotes = data.results[i].vote_average;
-    const imgData = data.results[i].poster_path;
-    // myDiv.querySelectorAll('movie-box')
+  movies.forEach((movie) => {
+    let { original_title, vote_average, poster_path } = movie;
+
     mainDiv.innerHTML += `<div class="movie-box"><img class="movie-pic" src="${
-      IMG + imgData
+      IMG + poster_path
     }" alt="movie of picture">
                     <div class="movie-info">
-                        <h3 class="movie-title">${movieTitle}</h3>
-                        <span class="movie-rating">${movieVotes}</span>
+                        <h3 class="movie-title">${original_title}</h3>
+                        <span class="movie-rating">${vote_average}</span>
                         </div></div>`;
     console.log();
     document.body.appendChild(mainDiv); // prints to the DOM
-
-    try {
-      await fetch(apiURL);
-    } catch (err) {
-      alert(err);
-    }
-  }
+  });
 }
 getMovies();
+
+//Original way, decided to to forEach
+// for (let i = 0; i < data.results.length; i++) {
+//   // if this out the loop it will not loop with the other items
+//   // const myDiv = document.createElement("div");
+//   // myDiv.className = "movie-box"
+//   const movieTitle = data.results[i].original_title;
+//   const movieVotes = data.results[i].vote_average;
+//   const imgData = data.results[i].poster_path;
+//   // myDiv.querySelectorAll('movie-box')
+//   mainDiv.innerHTML += `<div class="movie-box"><img class="movie-pic" src="${
+//     IMG + imgData
+//   }" alt="movie of picture">
+//                   <div class="movie-info">
+//                       <h3 class="movie-title">${movieTitle}</h3>
+//                       <span class="movie-rating">${movieVotes}</span>
+//                       </div></div>`;
+//   console.log();
+//   document.body.appendChild(mainDiv); // prints to the DOM
+
+// }
