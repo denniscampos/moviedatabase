@@ -10,10 +10,10 @@ async function getMovies() {
   // Movie Information
   // grabs the class .movie box from the html file.
   const mainDiv = document.createElement("div");
-  mainDiv.className = "main-container"
+  mainDiv.className = "main-container";
   for (let i = 0; i < data.results.length; i++) {
     // if this out the loop it will not loop with the other items
-    // const myDiv = document.createElement("div"); 
+    // const myDiv = document.createElement("div");
     // myDiv.className = "movie-box"
     const movieTitle = data.results[i].original_title;
     const movieVotes = data.results[i].vote_average;
@@ -27,8 +27,8 @@ async function getMovies() {
                         <span class="movie-rating">${movieVotes}</span>
                         </div></div>`;
     console.log();
-    document.body.appendChild(mainDiv) // prints to the DOM
-    
+    document.body.appendChild(mainDiv); // prints to the DOM
+
     try {
       await fetch(apiURL);
     } catch (err) {
@@ -36,4 +36,4 @@ async function getMovies() {
     }
   }
 }
-getMovies()
+getMovies();
