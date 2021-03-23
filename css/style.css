@@ -75,6 +75,12 @@ a:visited {
   border-radius: 13px;
   background: #797878;
   box-shadow: 13px 13px 26px #3d3c3c, -13px -13px 26px #8f8d8d;
+  transition: 0.5s ease;
+  transform: scale(0.95);
+}
+
+.movie-box:hover {
+ transform: scale(1);
 }
 
 .movie-info {
