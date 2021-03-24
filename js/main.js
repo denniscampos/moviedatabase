@@ -42,3 +42,5 @@ function showMovies(movies) {
   });
 }
 getMovies();
+
+console.log();
