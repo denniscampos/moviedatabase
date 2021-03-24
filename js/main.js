@@ -21,7 +21,7 @@ function showMovies(movies) {
   const mainDiv = document.createElement("div");
   mainDiv.className = "main-container";
   movies.forEach((movie) => {
-    let { original_title, vote_average, poster_path } = movie;
+    let { original_title, overview, vote_average, poster_path } = movie;
 
     mainDiv.innerHTML += `<div class="movie-box"><img class="movie-pic" src="${
       IMG + poster_path
@@ -29,6 +29,9 @@ function showMovies(movies) {
                     <div class="movie-info">
                         <h3 class="movie-title">${original_title}</h3>
                         <span class="movie-rating">${vote_average}</span>
+                        </div><div class="information">
+                        <h3 class="movie-title">${original_title}</h3>
+                        <p class="movie-overview">${overview}</p>
                         </div></div>`;
     console.log();
     document.body.appendChild(mainDiv); // prints to the DOM

@@ -61,6 +61,7 @@ a:visited {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
+  
 }
 
 .movie-box {
@@ -70,13 +71,12 @@ a:visited {
   width: 250px;
   margin: 0 30px 20px;
   padding: 10px 10px 75px;
-  /* background: rgba(126, 124, 124, 0.557);
-  border-radius: 5px; */
   border-radius: 13px;
   background: #797878;
   box-shadow: 13px 13px 26px #3d3c3c, -13px -13px 26px #8f8d8d;
   transition: 0.5s ease;
   transform: scale(0.95);
+  overflow: hidden; /* hides the information box */
 }
 
 .movie-box:hover {
@@ -99,6 +99,35 @@ a:visited {
   padding: 5px 0;
 }
 
+/******************************************
+/* Information pop up 
+/*******************************************/
+
+
+.information {
+  padding: 2rem;
+  position: absolute;
+  bottom: 0;
+  background-color: rgba(110, 110, 110, 0.897);
+  color: white;
+  max-height: 100%;
+  transform: translateY(100%); /* look this up */
+  overflow-y: auto;  /* look this up */
+  transition: transform 0.5s ease-in; /* look this up */
+  font-size: 0.8rem;
+}
+
+.movie-box:hover .information {
+  transform: translateY(0); /* look this up */
+}
+
+h3 {
+  font-weight: 800;
+}
+
+p {
+  /* font-size: 0.85rem; */
+}
 /******************************************
 /* ADDITIONAL STYLES
 /*******************************************/
