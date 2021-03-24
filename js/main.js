@@ -2,32 +2,28 @@ const API_KEY = "ec89c9f730c73e1aa9bb7e293afc6f93";
 const apiURL = `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}`;
 const IMG = "https://image.tmdb.org/t/p/w1280";
 
-//doms
-const main = document.getElementById("main");
-
 async function getMovies() {
-  try {
-    const res = await fetch(apiURL);
-    const data = await res.json();
+  const res = await fetch(apiURL);
+  const data = await res.json();
 
-    showMovies(data.results);
+  showMovies(data.results);
+
+  try {
+    await fetch(apiURL);
   } catch (err) {
-    console.log(err);
+    alert(err);
   }
 }
 
 function showMovies(movies) {
-  main.innerHTML = "";
   // Movie Information
   // grabs the class .movie box from the html file.
-
+  const mainDiv = document.createElement("div");
+  mainDiv.className = "main-container";
   movies.forEach((movie) => {
     let { original_title, overview, vote_average, poster_path } = movie;
 
-    const mainDiv = document.createElement("div");
-    mainDiv.classList.add("movie-box");
-
-    mainDiv.innerHTML += `<img class="movie-pic" src="${
+    mainDiv.innerHTML += `<div class="movie-box"><img class="movie-pic" src="${
       IMG + poster_path
     }" alt="movie of picture">
                     <div class="movie-info">
@@ -36,9 +32,30 @@ function showMovies(movies) {
                         </div><div class="information">
                         <h3 class="movie-title">${original_title}</h3>
                         <p class="movie-overview">${overview}</p>
-                        </div>`;
-    console.log(mainDiv);
-    main.appendChild(mainDiv); // prints to the DOM
+                        </div></div>`;
+    console.log();
+    document.body.appendChild(mainDiv); // prints to the DOM
   });
 }
 getMovies();
+
+//Original way, decided to to forEach
+// for (let i = 0; i < data.results.length; i++) {
+//   // if this out the loop it will not loop with the other items
+//   // const myDiv = document.createElement("div");
+//   // myDiv.className = "movie-box"
+//   const movieTitle = data.results[i].original_title;
+//   const movieVotes = data.results[i].vote_average;
+//   const imgData = data.results[i].poster_path;
+//   // myDiv.querySelectorAll('movie-box')
+//   mainDiv.innerHTML += `<div class="movie-box"><img class="movie-pic" src="${
+//     IMG + imgData
+//   }" alt="movie of picture">
+//                   <div class="movie-info">
+//                       <h3 class="movie-title">${movieTitle}</h3>
+//                       <span class="movie-rating">${movieVotes}</span>
+//                       </div></div>`;
+//   console.log();
+//   document.body.appendChild(mainDiv); // prints to the DOM
+
+// }
