@@ -134,6 +134,8 @@ a:visited {
 .information {
   padding: 2rem;
   position: absolute;
+  left: 0;
+  right: 0;
   bottom: 0;
   background-color: rgba(110, 110, 110, 0.897);
   color: white;
@@ -152,9 +154,6 @@ h3 {
   font-weight: 800;
 }
 
-p {
-  /* font-size: 0.85rem; */
-}
 /******************************************
 /* ADDITIONAL STYLES
 /*******************************************/
