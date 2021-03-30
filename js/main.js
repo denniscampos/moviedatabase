@@ -4,27 +4,41 @@ const tvURL = `https://api.themoviedb.org/3/tv/popular?api_key=${config.key}&lan
 
 //doms
 const movieBoxContainer = document.getElementById("main");
+const tvBoxContainer = document.getElementById("tv-shows");
 
-async function getMovies() {
+tvBoxContainer.addEventListener("click", (e) => {
+  e.preventDefault();
+  getMovies(apiURL, tvURL);
+});
+
+async function getMovies(contentType = "movie") {
+  const url = contentType === "movie" ? apiURL : tvURL;
+  // console.log(url);
+
   try {
-    const [res, res1] = [await fetch(apiURL), await fetch(tvURL)];
+    const res = await fetch(url);
     const data = await res.json();
-    const data1 = await res1.json();
 
-    showMovies(data.results);
+    showMovies(data.results, contentType);
   } catch (err) {
     console.log(err);
   }
 }
 
-function showMovies(movies) {
+function showMovies(movies, type) {
   movieBoxContainer.innerHTML = "";
 
   // Movie Information
   // grabs the class .movie box from the html file.
 
   movies.forEach((movie) => {
-    const { original_title, overview, vote_average, poster_path } = movie;
+    const {
+      original_title,
+      original_name,
+      overview,
+      vote_average,
+      poster_path,
+    } = movie;
 
     const mainDiv = document.createElement("div");
     mainDiv.classList.add("movie-box");
@@ -33,10 +47,14 @@ function showMovies(movies) {
       IMG + poster_path
     }" alt="movie of picture">
                     <div class="movie-info">
-                        <h3 class="movie-title">${original_title}</h3>
+                        <h3 class="movie-title">${
+                          type === "movie" ? original_title : original_name
+                        }</h3>
                         <span class="movie-rating">${vote_average}</span>
                         </div><div class="information">
-                        <h3 class="movie-title">${original_title}</h3>
+                        <h3 class="movie-title">${
+                          type === "movie" ? original_title : original_name
+                        }</h3>
                         <p class="movie-overview">${overview}</p>
                         </div>`;
 
