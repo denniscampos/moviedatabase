@@ -1,13 +1,15 @@
 const apiURL = `https://api.themoviedb.org/3/movie/popular?api_key=${config.key}`;
 const IMG = "https://image.tmdb.org/t/p/w1280";
+const tvURL = `https://api.themoviedb.org/3/tv/popular?api_key=${config.key}&language=en-US`;
 
 //doms
 const movieBoxContainer = document.getElementById("main");
 
 async function getMovies() {
   try {
-    const res = await fetch(apiURL);
+    const [res, res1] = [await fetch(apiURL), await fetch(tvURL)];
     const data = await res.json();
+    const data1 = await res1.json();
 
     showMovies(data.results);
   } catch (err) {
@@ -17,6 +19,7 @@ async function getMovies() {
 
 function showMovies(movies) {
   movieBoxContainer.innerHTML = "";
+
   // Movie Information
   // grabs the class .movie box from the html file.
 
@@ -42,3 +45,7 @@ function showMovies(movies) {
 }
 
 getMovies();
+
+/*
+TODO: 
+how to add click event to get TV shows popularity? API Link is different. */
