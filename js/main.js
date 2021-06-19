@@ -3,14 +3,9 @@ const API_KEY = "ec89c9f730c73e1aa9bb7e293afc6f93";
 const apiURL = `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}`;
 const IMG = "https://image.tmdb.org/t/p/w1280";
 const tvURL = `https://api.themoviedb.org/3/tv/popular?api_key=${API_KEY}&language=en-US`;
-const searchURL = `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=`;
 const upcomingURL = `https://api.themoviedb.org/3/movie/upcoming?api_key=${API_KEY}`;
 
 //doms
-const formInput = document
-  .querySelector("#form")
-  .addEventListener("submit", searchContent);
-const searchInput = document.querySelector(".search");
 const movieBoxContainer = document.getElementById("main");
 const tvBoxContainer = document.getElementById("tv-shows");
 const upcomingMovies = document.getElementById("upcoming-movies");
@@ -23,7 +18,20 @@ tvBoxContainer.addEventListener("click", (e) => {
 
 upcomingMovies.addEventListener("click", (e) => {
   e.preventDefault();
-  testMovies(upcomingURL);
+  upcoming(upcomingURL);
+});
+
+const searchBtn = document.getElementById("test");
+
+searchBtn.addEventListener("click", async (e) => {
+  e.preventDefault();
+  const userValue = document.getElementById("search").value.toLowerCase();
+  const searchURL = `https://api.themoviedb.org/3/search/multi?api_key=${API_KEY}&language=en-US&include_adult=false&query=${userValue}`;
+
+  const res = await fetch(searchURL);
+  const data = await res.json();
+  moreTestMovies(data.results);
+  console.log(data.results);
 });
 
 // url functions
@@ -40,12 +48,7 @@ async function getMovies(contentType = "movie") {
   }
 }
 
-async function searchContent() {
-  const res = await fetch(searchURL);
-  const data = await res.json();
-}
-
-async function testMovies() {
+async function upcoming() {
   const url = upcomingURL;
   try {
     const res = await fetch(url);
@@ -58,18 +61,17 @@ async function testMovies() {
 }
 
 // dom instructions
-function moreTestMovies(movies, type) {
-  console.log("hello");
 
+function moreTestMovies(movies, types) {
   movieBoxContainer.innerHTML = "";
 
   movies.forEach((movie) => {
     const {
       original_title,
+      original_name,
       overview,
       vote_average,
       poster_path,
-      original_name,
     } = movie;
 
     const mainDiv = document.createElement("div");
@@ -82,9 +84,7 @@ function moreTestMovies(movies, type) {
                         <h3 class="movie-title">${original_title}</h3>
                         <span class="movie-rating">${vote_average}</span>
                         </div><div class="information">
-                        <h3 class="movie-title">${
-                          type === "movie" ? original_title : original_name
-                        }</h3>
+                        <h3 class="movie-title">${original_title}</h3>
                         <p class="movie-overview">${overview}</p>
                         </div>`;
 
@@ -130,7 +130,3 @@ function showMovies(movies, type) {
 }
 
 getMovies();
-
-/*
-TODO: 
-how to add click event to get TV shows popularity? API Link is different. */
