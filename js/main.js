@@ -1,19 +1,32 @@
 const apiURL = `https://api.themoviedb.org/3/movie/popular?api_key=${config.key}`;
 const IMG = "https://image.tmdb.org/t/p/w1280";
 const tvURL = `https://api.themoviedb.org/3/tv/popular?api_key=${config.key}&language=en-US`;
+const searchURL = `https://api.themoviedb.org/3/search/movie?api_key=${config.key}&query=`;
+const upcomingURL = `https://api.themoviedb.org/3/movie/upcoming?api_key=${config.key}`;
 
 //doms
+const formInput = document
+  .querySelector("#form")
+  .addEventListener("submit", searchContent);
+const searchInput = document.querySelector(".search");
 const movieBoxContainer = document.getElementById("main");
 const tvBoxContainer = document.getElementById("tv-shows");
+const upcomingMovies = document.getElementById("upcoming-movies");
 
+// event listeners
 tvBoxContainer.addEventListener("click", (e) => {
   e.preventDefault();
   getMovies(apiURL, tvURL);
 });
 
+upcomingMovies.addEventListener("click", (e) => {
+  e.preventDefault();
+  testMovies(upcomingURL);
+});
+
+// url functions
 async function getMovies(contentType = "movie") {
   const url = contentType === "movie" ? apiURL : tvURL;
-  // console.log(url);
 
   try {
     const res = await fetch(url);
@@ -23,6 +36,58 @@ async function getMovies(contentType = "movie") {
   } catch (err) {
     console.log(err);
   }
+}
+
+async function searchContent() {
+  const res = await fetch(searchURL);
+  const data = await res.json();
+}
+
+async function testMovies() {
+  const url = upcomingURL;
+  try {
+    const res = await fetch(url);
+    const data = await res.json();
+    moreTestMovies(data.results);
+    console.log(data.results);
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+// dom instructions
+function moreTestMovies(movies, type) {
+  console.log("hello");
+
+  movieBoxContainer.innerHTML = "";
+
+  movies.forEach((movie) => {
+    const {
+      original_title,
+      overview,
+      vote_average,
+      poster_path,
+      original_name,
+    } = movie;
+
+    const mainDiv = document.createElement("div");
+    mainDiv.classList.add("movie-box");
+
+    mainDiv.innerHTML += `<img class="movie-pic" src="${
+      IMG + poster_path
+    }" alt="movie of picture">
+                    <div class="movie-info">
+                        <h3 class="movie-title">${original_title}</h3>
+                        <span class="movie-rating">${vote_average}</span>
+                        </div><div class="information">
+                        <h3 class="movie-title">${
+                          type === "movie" ? original_title : original_name
+                        }</h3>
+                        <p class="movie-overview">${overview}</p>
+                        </div>`;
+
+    movieBoxContainer.appendChild(mainDiv);
+  });
 }
 
 function showMovies(movies, type) {
