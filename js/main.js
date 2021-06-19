@@ -1,8 +1,10 @@
-const apiURL = `https://api.themoviedb.org/3/movie/popular?api_key=${config.key}`;
+const API_KEY = "ec89c9f730c73e1aa9bb7e293afc6f93";
+
+const apiURL = `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}`;
 const IMG = "https://image.tmdb.org/t/p/w1280";
-const tvURL = `https://api.themoviedb.org/3/tv/popular?api_key=${config.key}&language=en-US`;
-const searchURL = `https://api.themoviedb.org/3/search/movie?api_key=${config.key}&query=`;
-const upcomingURL = `https://api.themoviedb.org/3/movie/upcoming?api_key=${config.key}`;
+const tvURL = `https://api.themoviedb.org/3/tv/popular?api_key=${API_KEY}&language=en-US`;
+const searchURL = `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=`;
+const upcomingURL = `https://api.themoviedb.org/3/movie/upcoming?api_key=${API_KEY}`;
 
 //doms
 const formInput = document
