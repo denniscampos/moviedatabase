@@ -35,7 +35,7 @@ tvTopRated.addEventListener("click", (e) => {
   topTv(tvTopRatedURL);
 });
 
-const searchBtn = document.getElementById("test");
+const searchBtn = document.getElementById("search-btn");
 
 searchBtn.addEventListener("click", async (e) => {
   e.preventDefault();
@@ -44,7 +44,7 @@ searchBtn.addEventListener("click", async (e) => {
 
   const res = await fetch(searchURL);
   const data = await res.json();
-  moreTestMovies(data.results);
+  moreMovies(data.results);
   console.log(data.results);
 });
 
@@ -67,7 +67,7 @@ async function now() {
   try {
     const res = await fetch(url);
     const data = await res.json();
-    moreTestMovies(data.results);
+    moreMovies(data.results);
   } catch (err) {
     console.log(err);
   }
@@ -89,7 +89,7 @@ async function upcoming() {
   try {
     const res = await fetch(url);
     const data = await res.json();
-    moreTestMovies(data.results);
+    moreMovies(data.results);
     console.log(data.results);
   } catch (err) {
     console.log(err);
@@ -98,7 +98,7 @@ async function upcoming() {
 
 // dom instructions
 
-function moreTestMovies(movies, types) {
+function moreMovies(movies, types) {
   movieBoxContainer.innerHTML = "";
 
   movies.forEach((movie) => {
